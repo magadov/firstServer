@@ -1,12 +1,15 @@
 const http = require('http');
-
+const fs = require('fs');
+const path = require ('path');
 const server = http.createServer((req, res) =>{
-  res.writeHead(200, {
-    "Content-text": "text/html"
+  res.writeHead(200)
+
+  fs.readFile(path.resolve(__dirname, 'pages', 'index.html'), (err, data)=>{
+    res.write(data.toString());
+
+    res.end();
   })
 
-  res.write('<h1>Hello from intocode coding bootcamp</h2>')
-
-  res.end();
 })
-server.listen(3000)
+
+server.listen(3000);
